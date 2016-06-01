@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Task Organizer</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+
+    <!-- FRONT PAGE WHEN NOT SIGNED IN -->
+    <div id="index" class="container-fluid">
+      <h1 class="text-center logo">GSD</h1>
+      <div class="col-md-4 col-md-offset-4" id="indexDiv">
+        <h2 id="message">Your tasks. Organized.</h2>
+        <button type="button" class="btn btn-default btn-lg myBtn" data-toggle="modal" data-target="#register">Get Started</button>
+      </div>
+    </div>
+    <!-- END OF FRONT PAGE -->
+
+  <!-- LOGIN CONTAINER -->
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  	  <div class="modal-dialog">
+			  <div class="col-md-6 col-md-offset-3">
+          <form action="./" class="form-signin" method="post" id="login-form">
+            <h1>Log In</h1>
+              <div id="error">
+              <!-- error will be shown here ! -->
+              </div>
+              <input type="email" class="form-control" placeholder="email" name="email" id="emailInput" required/>
+              <input type="password" class="form-control" placeholder="password" name="password" id="passwordInput" required/>
+              <button type="button" class="btn btn-default text-center myBtn" name="btn-login" id="btn-login">
+                  <span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign In
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+  <!-- END OF LOGIN CONTAINER -->
+
+  <!-- REGISTER CONTAINER -->
+    <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  	  <div class="modal-dialog">
+			  <div class="col-md-6 col-md-offset-3">
+          <form action="./" class="form-signin" method="post" id="register-form">
+            <h1>Register</h1>
+              <div id="error">
+              <!-- error will be shown here ! -->
+              </div>
+              <input type="text" class="form-control" placeholder="name" name="name" id="nameInput" required />
+              <input type="email" class="form-control" placeholder="email" name="email" id="emailInput" required/>
+              <input type="text" class="form-control" placeholder="phone" name="phone" id="phoneInput" required />
+              <input type="password" class="form-control" placeholder="password" name="password" id="passwordInput" required/>
+              <button type="submit" class="btn btn-default text-center myBtn" name="btn-register" id="btn-register">
+                  <span class="glyphicon glyphicon-log-in"></span> &nbsp; Let's Go
+              </button>
+              <span>Already a user?</span><a href="#" data-toggle="modal" data-dismiss="modal" data-target="#login">Login</a>
+            </form>
+          </div>
+        </div>
+      </div>
+  <!-- END OF REGITERCONTAINER -->
+
+  <!-- NEW TASK CONTAINER -->
+  <div class="modal fade" id="newTask" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="col-md-6 col-md-offset-3">
+        <form action="./" class="form-newTask" method="post" id="newTask-form">
+          <h1>New Task</h1>
+            <div id="error">
+            <!-- error will be shown here ! -->
+            </div>
+            <input type="text" class="form-control" placeholder="name" name="taskName" id="taskName" required />
+            <input type="text" class="form-control" placeholder="deadline" name="deadline" id="taskDeadline" required/>
+            <select name="stationSelect" class="form-control" title="station" id="stationSelect">
+              <!-- options will be fetched from database handled in function createStation -->
+            </select>
+            <label for="smsNotif">Get notified: </label>
+            <input type="checkbox" name="smsNotif" id="smsNotif"> SMS </input>
+            <input type="checkbox" name="desktopNotif" id="desktopNotif"> Desktop </input>
+            <textarea name="notes" id="taskNotes" placeholder="Add some notes here" rows="6" cols="35"></textarea>
+            <button type="button" class="btn btn-default text-center btn-create" name="btn-newTask" id="btn-newTask">
+                Create
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  <!-- END OF NEW TASK CONTAINER -->
+
+
+  <!-- UPDATE TASK CONTAINER -->
+  <div class="modal fade" id="updateTask" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="col-md-6 col-md-offset-3">
+        <form action="./" class="form-updateTask" method="post" id="updateTask-form">
+          <h1>Update Task</h1>
+            <div id="error">
+            <!-- error will be shown here ! -->
+            </div>
+            <input type="text" class="form-control" placeholder="name" name="taskName" id="taskName" required />
+            <input type="text" class="form-control" placeholder="deadline" name="deadline" id="taskDeadline" required/>
+
+            <label for="smsNotif">Get notified: </label>
+            <input type="checkbox" name="smsNotif" id="smsNotif"> SMS </input>
+            <input type="checkbox" name="desktopNotif" id="desktopNotif"> Desktop </input>
+            <textarea name="notes" id="taskNotes" placeholder="Add some notes here" rows="6" cols="35"></textarea>
+            <button type="button" class="btn btn-default text-center btn-create" name="btn-updateTask" id="btn-updateTask">
+                Update
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  <!-- END OF UPDATE TASK CONTAINER -->
+
+  <!-- NEW STATION CONTAINER -->
+  <div class="modal fade" id="newStation" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="col-md-6 col-md-offset-3">
+        <form action="./" method="post" id="newStation-form">
+          <h1>New Board</h1>
+            <div id="error">
+            <!-- error will be shown here ! -->
+            </div>
+            <input type="text" class="form-control" placeholder="name" id="stationName" name="name" required />
+            <button type="button" class="btn btn-default text-center btn-create" id="btn-newStation">
+                Create
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  <!-- END OF NEW STATION CONTAINER -->
+
+  <!-- MAIN CONTENT -->
+  <div id="mainContent" class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-3">
+          <p class="welcome"></p>
+          <a name="btn-logout" id="btn-logout">Log Out</a>
+        </div>
+        <h1 class="logo text-center">GSD</h1>
+      </div>
+    </div>
+
+    <div class="row" id="stationsWrapper">
+        <div class="col-md-7 col-sm-7 col-xs-12">
+          <h1 class="text-right">Your boards</h1>
+        </div>
+        <div class="col-md-5 col-sm-5 col-xs-12">
+          <div class="col-md-2 col-sm-4 col-xs-4 col-xs-offset-2">
+            <button type="button" data-toggle="modal" data-target="#newStation" class="btn btn-add" id="btn-addStation">
+              <span data-toggle="tooltip" data-placement="bottom" title="new board" class="glyphicon glyphicon-plus"></span>
+            </button>
+          </div>
+        <div class="col-md-2 col-sm-4 col-xs-4">
+          <button type="button" data-toggle="modal" data-target="#newTask"class="btn btn-add" id="btn-addTask">
+            <span data-toggle="tooltip" data-placement="bottom" title="new task" class="glyphicon glyphicon-edit"></span>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <hr/>
+      </div>
+      <div class="col-md-8 col-md-offset-2" id="stationsDiv">
+        <!-- stations will be fetched from database and displayed here -->
+      </div>
+      <div class="col-md-12" id="tasksDiv-wrapper">
+        <h1 class="text-center"></h1>
+        <div class="col-md-1">
+          <!-- button to go back to stations -->
+          <span id="btn-goBack" data-toggle="tooltip" data-placement="bottom" title="Back To Stations"
+          class="glyphicon glyphicon-arrow-left"></span>
+        </div>
+        <div class="col-md-10" id="tasksDiv">
+          <!-- tasks will be fetched from database and displayed here -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END OF MAIN CONTENT -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script>
+    $('document').ready(function(){
+      // request permission for notifications on page load
+      document.addEventListener('DOMContentLoaded', function () {
+        if (Notification.permission !== "granted")
+          Notification.requestPermission();
+      });
+
+      function notify(name, deadline) {
+        if (!Notification) {
+          alert('Desktop notifications not available in your browser. Try Chromium.');
+          return;
+        }
+
+        if (Notification.permission !== "granted")
+          Notification.requestPermission();
+        else {
+          var audio = new Audio('sound/pop.mp3');
+          audio.play();
+          var notification = new Notification('New Task Created', {
+            icon: 'img/newtask.png',
+            body: "Your task "+name+" is due on "+deadline+". We will send you notifications now and again. You can change these in your settings."
+          });
+
+          notification.onclick = function () {
+            //display task on notffication click
+          };
+        }
+      }
+      //check if user has been loggen in already
+      //if the key doesn't exist it will return null
+      if(localStorage.getItem('username') !== null)
+      {
+        createStation();
+      }
+      //enable jQuery datepicker on tne new task modal
+      $("#taskDeadline").datepicker({ dateFormat: 'yy-mm-dd' });
+
+      /* login submit */
+      $(document).on('click','#btn-login', function(){
+        var emailInput = $('#emailInput').val();
+        var passwordInput = $('#passwordInput').val();
+        var thelink = 'login.php?email='+emailInput+'&password='+passwordInput;
+
+        $.getJSON(thelink,function(data)
+        {
+          if(data.response == "true"){
+            $('#login').modal('hide'); //close the modal
+            localStorage.setItem("username",data.username);
+            createStation();
+            $('#login-form')[0].reset(); //clear the form
+         }
+         else{
+          $("#error").fadeIn(1000, function(){
+            $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+data.response+' !</div>');
+             });
+         }
+        });
+      });
+
+        /* register submit */
+        $(document).on('submit','#register-form', function(){
+          $.ajax({
+            type: "POST",
+            url: "register.php",
+            data: $('#register-form').serialize(),
+            success: function(data){
+              if(data == "true"){
+                //close modal and show login
+                $('#register').modal('hide');
+                $('#login').modal('show');
+             }
+             else{
+              $("#error").fadeIn(1000, function(){
+                $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+data+' !</div>');
+                 });
+             }
+           }
+          });
+        $('#register-form')[0].reset(); //clear form
+        return false;
+        });
+
+    //logout
+    $(document).on('click','#btn-logout', function(){
+      $.ajax({
+        type : 'POST',
+        url  : 'logout.php',
+         success: function(data) {
+           $('#index').css("display", "block");
+           $('#mainContent').css("display", "none");
+          localStorage.clear(); //delete everything in local storage
+         }
+      });
+    });
+
+    //load the stations in divs
+    function createStation(){
+      $('#index').css("display", "none");
+      $('#mainContent').css("display", "block");
+      $(".welcome").html("Logged in as "+localStorage.getItem("username"));
+
+      $.getJSON('createStation.php',function(data){
+        var txt = "";
+        var selectOptions = "";
+        var icons = ['forders', 'studies','group','personal', 'work'];
+        var iconName;
+
+        for(var i in data)
+           {
+             var name = data[i].name;
+             //check if there's an icon for the folder name
+             //otherwise display default icon - folders
+            if($.inArray(name, icons) >= 0)
+            {
+              iconName = name;
+            }
+            else{
+              iconName = 'folders';
+            }
+             txt += '<div class="col-md-2 col-sm-3 col-sm-offset-2 col-xs-4 col-xs-offset-2 station text-center" id="station-'+name+'"><img  data-toggle="tooltip" data-placement="bottom" title="'+name+'" src="img/'+iconName+'.png"></img><p>'+name+'</p></div>';
+             //while at it, might as well populate the select element in the modal for creating new task
+             selectOptions += '<option value="'+name+'">'+name+'</option>';
+           }
+        $('#stationsDiv').html(txt);
+        $('#stationSelect').html(selectOptions);
+
+        //enable bootstrap tooltip
+        $('[data-toggle="tooltip"]').tooltip();
+
+		   });
+
+    }
+
+    $(document).on('click','#btn-newStation', function(){
+      //create new station on click
+      var stationName = $('#stationName').val();
+      var linkWithName = 'newStation.php?name='+stationName;
+      $.getJSON(linkWithName,function(jData){
+
+        if(jData.status == "true")
+        {
+          $('#newStation').modal('hide');
+          createStation();
+        }
+        else{
+          $("#error").fadeIn(1000, function(){
+            $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+jData.status+' !</div>');
+             });
+            }
+       });
+       $('#newStation-form')[0].reset(); //clear the form
+    });
+
+    $(document).on('click','#btn-newTask', function(){
+      //when creating a new task
+      //connect to the database
+      var taskName = $('#taskName').val();
+      var deadline = $('#taskDeadline').val();
+      var station = $('#stationSelect option:selected').text();
+      var smsNotif = +$('#smsNotif').is(':checked');
+      var desktopNotif = +$('#desktopNotif').is(':checked'); //returns 1 or 0 if checked
+      var notes = $('#taskNotes').val();
+      var newTaskLink = 'newTask.php?taskName='+taskName+'&deadline='+deadline+'&station='+station+'&smsNotif='+smsNotif+
+      '&desktopNotif='+desktopNotif+'&notes='+notes;
+
+      $.getJSON(newTaskLink, function(jData){
+        if(jData.response == "true"){
+          if(jData.sms_notif == 1){
+            //send sms that new task has been created if sms has been checked
+            sendSMS(jData.mobile, jData.task_name, jData.deadline);
+          }
+          $('#newTask').modal('hide');
+          displayTasks(localStorage.getItem('currentStation'));
+          //send notification of the new task created only if it has been checked
+          if(jData.desktop_notif == 1)
+          {
+            notify(jData.task_name, jData.deadline);
+          }
+       }
+       else{
+        $("#error").fadeIn(1000, function(){
+          $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+jData.response+' !</div>');
+           });
+       }
+       $('#newTask-form')[0].reset(); //clear the form
+     });
+
+  });
+
+    //when clicked on a station div, display all relevant tasks
+    $(document).on('click','.station', function(){
+      //select the id and strip the string after the dash -, returns the station name
+      var stationName = $(this).attr("id").split("-").pop();
+      localStorage.setItem('currentStation', stationName);
+      displayTasks(stationName);
+      //check the current station and set the corresponding select as default selected
+      $('#stationSelect option[value="'+localStorage.getItem('currentStation')+'"]').attr("selected",true);
+    });
+
+    function displayTasks(name) {
+      //get the name of the station
+      //take and pass parameter to php
+      var taskLink = 'createTasks.php?station='+name;
+      //hide stations div
+      $('#stationsDiv').css("display", "none");
+      $('#tasksDiv-wrapper').css("display", "block");
+      $('#tasksDiv-wrapper h1').text(localStorage.getItem('currentStation'));
+      //get json data and append to tasksDiv
+      $.getJSON(taskLink,function(data){
+        var elements = "";
+
+        //if no tasks are found, display a message
+        if(data == "")
+        {
+          $('#tasksDiv').html('<h3 class="text-center" style="text-transform:uppercase;opacity: 0.3;">the station is empty.</h3>');
+        }
+        else { //otherwise display the tasks
+          for(var i in data)
+             {
+               //set the icon for desktop and sms notification
+               //ok check if true, remove icon if false
+               function getIcon(notification)
+               {
+                 if(notification != "0")
+                 {
+                   return 'glyphicon glyphicon-ok';
+                 }
+                 else {
+                   return 'glyphicon glyphicon-remove';
+                 }
+               }
+               elements += '<div class="task col-md-3 col-sm-6 col-xs-10 col-xs-offset-1 text-center" id="task-'+data[i]. task_id+'"><h2>'+data[i].task_name+
+               '</h2><span class="glyphicon glyphicon-calendar"><span class="task-txt">'+data[i].deadline+
+               '</span></span><span class="'+getIcon(data[i].sms_notif)+'"><span class="task-txt">SMS</span></span><span class="'+getIcon(data[i].desktop_notif)+
+               '"><span class="task-txt">Desktop</span></span><p>'+data[i].notes+
+               '</p><button data-toggle="tooltip" data-placement="bottom" title="delete" id="delete-task"><span class="glyphicon glyphicon-remove"></span></button><button data-toggle="tooltip" data-placement="bottom" title="edit" id="edit-task"><span class="glyphicon glyphicon-pencil"></span></button></div>';
+             }
+          $('#tasksDiv').html(elements);
+        }
+        //enable bootstrap tooltip
+        $('[data-toggle="tooltip"]').tooltip();
+       });
+    } //end of display tasks
+
+    $(document).on('click', '#delete-task', function(){
+      //get the id from the parent div
+      var taskId = $(this).parent().attr('id').split('-').pop();
+
+      var actionLink = 'deleteTask.php?taskId='+taskId;
+
+      $.getJSON(actionLink,function(data){
+        displayTasks(localStorage.getItem('currentStation'));
+       });
+    });
+
+    $(document).on('click', '#edit-task', function(){
+      //open modal
+      //get if from the selected task
+      var taskId = $(this).parent().attr('id').split('-').pop();
+      localStorage.setItem('currentTaskId', taskId);
+      var populateModal = 'getTaskInfo.php?taskId='+taskId;
+
+      $.getJSON(populateModal,function(jData){
+        $('.form-updateTask #taskName').val(jData[3]);
+        $('.form-updateTask #taskDeadline').val(jData[4]);
+        $('.form-updateTask #taskNotes').val(jData[5]);
+        if(jData[6] == 1)
+        {
+          $('.form-updateTask #smsNotif').prop('checked', true);
+        }
+        else if(jData[7] == 1){
+          $('.form-updateTask #desktopNotif').prop('checked', true);
+        }
+       });
+       $('#updateTask').modal('show');
+
+    });
+
+
+    $(document).on('click', '#btn-updateTask', function(){
+
+      var url = "updateTask.php?taskId="+localStorage.getItem('currentTaskId');
+      var data = $('#updateTask-form').serialize();
+
+      $.getJSON(url, data, function(result){
+          console.log(result);
+      });
+
+      $('#updateTask').modal('hide');
+      displayTasks(localStorage.getItem('currentStation'));
+
+    });
+
+    $(document).on('click','#btn-goBack', function(){
+      //go back from task view to station view
+      $('#tasksDiv-wrapper').css("display", "none");
+      $('#stationsDiv').css("display", "block");
+    });
+
+
+    function sendSMS(mobile,name,deadline){
+      var message = 'Created task "'+name+'" with due date on '+deadline;
+      var linktoSMS ='http://www.ecuanota.com/api-send-sms?key=NzI2-YmMy-YjI2-NTk3-Nzcw-MWE5-Nzc5-M2E0-YWQ3-MTQ4-N2Y6&mobile='+
+      mobile+'&message='+message;
+
+      $.getJSON(linktoSMS, function(jData){
+      });
+    }
+  }); //document ready close
+
+    </script>
+
+  </body>
+</html>

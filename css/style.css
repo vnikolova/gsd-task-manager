@@ -1,0 +1,151 @@
+@font-face {
+  src: url(../fonts/RawDeltaHandStreet.ttf);
+  font-family: Raw-Delta;
+}
+body{
+  background-color: #252839;
+  color: #b5b5b7;
+  font-family: 'Raleway', sans-serif;
+}
+.btn {
+  width: 100%;
+}
+input {
+  margin-bottom: 2%;
+}
+
+#login, #register {
+  margin-top: 10vh;
+}
+
+#mainContent {
+  display: none;
+}
+#index {
+  height: 100vh;
+  width: 100vw;
+  background: url(../img/background.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.logo {
+  font-family: Raw-Delta;
+  font-size: 3em;
+}
+.logo,   a {
+  color: rgb(255,212,84);
+}
+a:hover {
+  color: white;
+}
+#index h2 {
+  font-size: 2.5em;
+}
+#index h2, span {
+  font-family: 'Raleway', sans-serif;
+  color: white;
+}
+#indexDiv {
+  margin-top: 20%;
+}
+.myBtn {
+  background: rgba(192,192,192,0.4);
+  border: 2px solid white;
+}
+#btn-register {
+  font-weight: bold;
+  color:white;
+}
+  .myBtn:hover{
+  background: rgba(255,212,84,0.5);
+  border: 2px solid black;
+  }
+  .login-help {
+    color: white;
+  }
+  .welcome {
+    display: inline;
+  }
+  #btn-logout {
+    color: white;
+    cursor: pointer;
+  }
+
+/* station */
+#stationsDiv {
+  margin-top: 5%;
+}
+.station {
+  background: rgb(255,212,84);
+  padding: 3%;
+  color: black;
+  margin: 1%;
+  display: inline;
+  cursor: pointer;
+}
+.station img {
+  width: 30px;
+  height: auto;
+}
+
+.station img:hover {
+  -webkit-transform: scale(0.5);
+-moz-transform: scale(0.5);
+-o-transform: scale(0.5);
+transform: scale(0.5);
+transition: all 0.3s;
+-webkit-transition: all 0.3s;
+}
+
+.btn-add {
+  background-color: transparent;
+  border: 2px solid #0593A1;
+  margin-top: 50%;
+}
+.btn-add span, .task h2 {
+ color: #0593A1;
+}
+.btn-add:hover {
+  background-color: rgba(5,147,161,0.4);
+}
+.btn-create {
+  background: rgb(255,212,84);
+  border: 2px solid black;
+}
+
+/* tasks */
+.task {
+  display: inline;
+  background: rgba(255,212,84,0.8);
+  padding: 10px;
+  color: white;
+  margin: 2%;
+}
+.task button {
+  background-color: transparent;
+  border: none;
+  margin: 1%;
+}
+
+.task-txt  {
+  margin-right: 1%;
+  font-family: Helvetica;
+  margin-right:3px;
+}
+.task p {
+  font-size: 1.5em;
+}
+#display-empty {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 2em;
+}
+#tasksDiv-wrapper {
+  display: none;
+}
+
+#btn-goBack {
+  cursor: pointer;
+}
