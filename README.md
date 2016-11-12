@@ -1,5 +1,6 @@
+#Get S#!t Done (GSD)
 
-written in HTML, CSS (Bootsrap) and JavaScript(jQuery), data handled with PHP and mySQL.
+task management tool written in HTML, CSS (Bootsrap) and JavaScript(jQuery), data handled with PHP and mySQL.
 Uses API to send text messages upon task creation.
 With implemented desktop notifications.
 
@@ -15,4 +16,10 @@ Edit, Delete, View an Create tasks
 
 ![Alt text](http://i63.tinypic.com/110ehz6.png)
 
-N.B. import final_db before testing
+#Testing
+
+1. clone the project
+2. copy the folder to your local server destination
+3. in phpMyadmin create new db - final_db
+4. import SQL from final_db.sql
+5. you're all set! 
