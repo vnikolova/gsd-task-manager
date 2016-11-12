@@ -79,9 +79,9 @@ a:hover {
 }
 .station {
   background: rgb(255,212,84);
-  padding: 3%;
+  padding: 16px;
   color: black;
-  margin: 1%;
+  margin: 8px;
   display: inline;
   cursor: pointer;
 }
