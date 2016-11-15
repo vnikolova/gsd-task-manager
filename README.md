@@ -1,4 +1,4 @@
-#Get S#!t Done (GSD)
+#Get Stuff Done (GSD)
 
 task management tool written in HTML, CSS (Bootsrap) and JavaScript(jQuery), data handled with PHP and mySQL.
 Uses API to send text messages upon task creation.
