@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
--- http://www.phpmyadmin.net
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2016 at 02:26 PM
--- Server version: 5.7.9
--- PHP Version: 5.6.16
+-- Generation Time: Nov 20, 2016 at 01:21 PM
+-- Server version: 5.7.14
+-- PHP Version: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `final_db`
 --
+CREATE DATABASE IF NOT EXISTS `final_db` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `final_db`;
 
 -- --------------------------------------------------------
 
@@ -26,14 +28,11 @@ SET time_zone = "+00:00";
 -- Table structure for table `stations`
 --
 
-DROP TABLE IF EXISTS `stations`;
-CREATE TABLE IF NOT EXISTS `stations` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `stations` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `name` varchar(65) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
+  `name` varchar(65) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `stations`
@@ -51,9 +50,8 @@ INSERT INTO `stations` (`id`, `user_id`, `name`) VALUES
 -- Table structure for table `tasks`
 --
 
-DROP TABLE IF EXISTS `tasks`;
-CREATE TABLE IF NOT EXISTS `tasks` (
-  `task_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tasks` (
+  `task_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `station_id` int(11) NOT NULL,
   `task_name` varchar(65) NOT NULL,
@@ -61,11 +59,8 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `notes` text,
   `sms_notif` tinyint(1) NOT NULL DEFAULT '0',
   `desktop_notif` tinyint(1) NOT NULL DEFAULT '0',
-  `status` varchar(40) DEFAULT NULL,
-  PRIMARY KEY (`task_id`),
-  KEY `user_id` (`user_id`),
-  KEY `station_id` (`station_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  `status` varchar(40) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tasks`
@@ -82,15 +77,13 @@ INSERT INTO `tasks` (`task_id`, `user_id`, `station_id`, `task_name`, `deadline`
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
   `name` varchar(25) NOT NULL,
   `email` varchar(60) NOT NULL,
   `phone` varchar(10) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -99,6 +92,50 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `password`) VALUES
 (1, 'Viktoriya', 'viksnikolova@gmail.com', '52761282', 'password');
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `stations`
+--
+ALTER TABLE `stations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `tasks`
+--
+ALTER TABLE `tasks`
+  ADD PRIMARY KEY (`task_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `station_id` (`station_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `stations`
+--
+ALTER TABLE `stations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+--
+-- AUTO_INCREMENT for table `tasks`
+--
+ALTER TABLE `tasks`
+  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- Constraints for dumped tables
 --
