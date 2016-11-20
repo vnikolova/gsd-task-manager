@@ -7,7 +7,7 @@
 body{
   background-color: #252839;
   color: #b5b5b7;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rajdhani', sans-serif;
 }
 .btn {
   width: 100%;
@@ -33,7 +33,7 @@ input {
   background-size: cover;
 }
 .logo {
-  width: 150px;
+  width: 120px;
   height: auto;
 }
 
@@ -128,7 +128,9 @@ a:hover {
   width: 30px;
   height: auto;
 }
-
+#stationsWrapper h1 {
+  text-transform: uppercase;
+}
 .station img:hover {
   -webkit-transform: scale(0.5);
 -moz-transform: scale(0.5);
