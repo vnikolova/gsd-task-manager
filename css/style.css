@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Rajdhani');
+
 @font-face {
   src: url(../fonts/RawDeltaHandStreet.ttf);
   font-family: Raw-Delta;
@@ -31,12 +33,10 @@ input {
   background-size: cover;
 }
 .logo {
-  font-family: Raw-Delta;
-  font-size: 3em;
+  width: 150px;
+  height: auto;
 }
-.logo,   a {
-  color: rgb(255,212,84);
-}
+
 a:hover {
   color: white;
 }
@@ -44,24 +44,63 @@ a:hover {
   font-size: 2.5em;
 }
 #index h2, span {
-  font-family: 'Raleway', sans-serif;
-  color: white;
+  color: black;
 }
 #indexDiv {
+  font-family: 'Rajdhani', sans-serif;
   margin-top: 20%;
 }
 .myBtn {
-  background: rgba(192,192,192,0.4);
-  border: 2px solid white;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 0;
+  border: 4px solid;
+  border-color: rgb(255,212,84);
+  background: transparent;
+
+  position:relative;
+ vertical-align: middle;
+ display: inline-block;
+ text-align: center;
+ transition: 0.5s;
+ cursor: pointer;
+ -webkit-transition:0.5s;
 }
+
 #btn-register {
   font-weight: bold;
   color:white;
 }
+.myBtn::before, .myBtn::after {
+  width: 100%;
+  height:100%;
+  z-index: 3;
+  content:'';
+  position: absolute;
+  top:0;
+  left:0;
+  box-sizing: border-box;
+  -webkit-transform: scale(0);
+  transition: 0.5s;
+}
   .myBtn:hover{
   background: rgba(255,212,84,0.5);
-  border: 2px solid black;
+  border-color: black;
   }
+  .myBtn::before {
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    -webkit-transform-origin: 100% 0%;
+  }
+
+  .myBtn::after {
+    border-top: 2px solid black;
+    border-right: 2px solid black;
+    -webkit-transform-origin: 0% 100%;
+  }
+  .myBtn:hover::after, .myBtn:hover::before {
+  -webkit-transform: scale(1);
+}
   .login-help {
     color: white;
   }
