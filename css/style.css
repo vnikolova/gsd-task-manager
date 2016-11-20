@@ -43,8 +43,12 @@ a:hover {
 #index h2 {
   font-size: 2.5em;
 }
-#index h2, span {
+#index h2 {
   color: black;
+}
+
+span {
+  color: white;
 }
 #indexDiv {
   font-family: 'Rajdhani', sans-serif;
