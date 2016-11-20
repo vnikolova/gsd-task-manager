@@ -20,6 +20,5 @@ Edit, Delete, View an Create tasks
 
 1. clone the project
 2. copy the folder to your local server destination
-3. in phpMyadmin create new db - final_db
-4. import SQL from final_db.sql
-5. you're all set! 
+3. import SQL from final_db.sql
+4. you're all set!
